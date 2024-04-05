@@ -11,7 +11,7 @@ require (
 	github.com/hashicorp/terraform-plugin-framework v1.7.0
 	github.com/hashicorp/terraform-plugin-go v0.22.1
 	github.com/hashicorp/terraform-plugin-testing v1.7.0
-	github.com/zclconf/go-cty v1.14.3
+	github.com/zclconf/go-cty v1.14.4
 	github.com/zclconf/go-cty-yaml v1.0.3
 )
 
