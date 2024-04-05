@@ -3,6 +3,8 @@ package provider
 import (
 	"context"
 	"fmt"
+	"golang.org/x/exp/maps"
+	"sort"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/ext/tryfunc"
@@ -157,9 +159,11 @@ func providerDescription() string {
 ### Available Functions
 
 Not all functions available in Terraform are included in this module. A list of the available functions in included below:`
-	for k, _ := range functions() {
+	funcs := sort.StringSlice(maps.Keys(functions()))
+	sort.Sort(funcs)
+	for _, f := range funcs {
 		mdArray += fmt.Sprintf(
-			"\n - [`%s`](https://developer.hashicorp.com/terraform/language/functions/%s)", k, k)
+			"\n - [`%s`](https://developer.hashicorp.com/terraform/language/functions/%s)", f, f)
 	}
 	return mdArray
 }
