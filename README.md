@@ -26,9 +26,9 @@ Then commit the changes to `go.mod` and `go.sum`.
 ```hcl
 terraform {
   required_providers {
-    vault = {
+    string-template = {
       source = "mbillow/string-template"
-      version = "???"
+      version = "0.1.0"
     }
   }
 }
@@ -45,7 +45,7 @@ variable "demo_template" {
   EOT
 }
 
-locals = {
+locals {
   template_vars = {
     ip_addresses = "1.1.1.1,2.2.2.2,3.3.3.3"
   }
@@ -60,10 +60,13 @@ output "demo" {
 ```
 
 Output:
-```text
-1.1.1.1
-2.2.2.2
-3.3.3.3
+```hcl
+Changes to Outputs:
+  + demo = <<-EOT
+        1.1.1.1
+        2.2.2.2
+        3.3.3.3
+    EOT
 ```
 
 ## Developing the Provider
