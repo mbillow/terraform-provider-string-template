@@ -33,7 +33,7 @@ func (r TemplateFunction) Metadata(_ context.Context, req function.MetadataReque
 func (r TemplateFunction) Definition(_ context.Context, _ function.DefinitionRequest, resp *function.DefinitionResponse) {
 	resp.Definition = function.Definition{
 		Summary:             "Templates a string using HCL string templating",
-		MarkdownDescription: "Templates a string using [HCL string templating](https://developer.hashicorp.com/terraform/language/expressions/strings).",
+		MarkdownDescription: providerDescription(),
 		Parameters: []function.Parameter{
 			function.StringParameter{
 				Name:                "template",
@@ -149,4 +149,17 @@ func functions() map[string]ctyfunc.Function {
 		"yamlencode":      ctyyaml.YAMLEncodeFunc,
 		"zipmap":          stdlib.ZipmapFunc,
 	}
+}
+
+func providerDescription() string {
+	mdArray := `Templates a string using [HCL string templating](https://developer.hashicorp.com/terraform/language/expressions/strings).
+
+### Available Functions
+
+Not all functions available in Terraform are included in this module. A list of the available functions in included below:`
+	for k, _ := range functions() {
+		mdArray += fmt.Sprintf(
+			"\n - [`%s`](https://developer.hashicorp.com/terraform/language/functions/%s)", k, k)
+	}
+	return mdArray
 }
